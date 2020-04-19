@@ -1,0 +1,20 @@
+name: Build Meteor app
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: meteorengineer/setup-meteor@v1
+      with:
+        meteor-release: '1.8.1'
+    - run: meteor npm instatll
+    - run: meteor npm test
