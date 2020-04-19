@@ -15,6 +15,6 @@ jobs:
     - uses: actions/checkout@v2
     - uses: meteorengineer/setup-meteor@v1
       with:
-        meteor-release: '1.8.1'
+        meteor-release: '1.10.1'
     - run: meteor npm instatll
     - run: meteor npm test
