@@ -17,4 +17,4 @@ jobs:
       with:
         meteor-release: '1.10.1'
     - run: meteor npm install
-    - run: meteor npm test
+    - run: meteor npm run test
