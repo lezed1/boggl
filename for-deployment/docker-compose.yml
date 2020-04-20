@@ -4,7 +4,7 @@ services:
     build:
       context: ../boggl
       dockerfile: ../for-deployment/Dockerfile
-    image: lezed1/boggl
+    image: docker.pkg.github.com/lezed1/boggl/server:latest
     ports:
       - "127.0.0.1:44359:3000"
     depends_on:
