@@ -16,10 +16,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Install docker-compose
-        run: curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o docker-compose && chmod +x docker-compose
+        run: curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o ~/docker-compose && chmod +x ~/docker-compose
       - name: Build Docker image
         working-directory: ./boggl/for-deployment
-        run: ../../docker-compose build
+        run: ~/docker-compose build
       - name: Push Docker image
         working-directory: ./boggl/for-deployment
-        run: ../../docker-compose push
+        run: ~/docker-compose push
