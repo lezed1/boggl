@@ -1,0 +1,25 @@
+name: Build Meteor server Docker container
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: azure/docker-login@v1
+        with:
+          login-server: "docker.pkg.github.com"
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install docker-compose
+        run: curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o docker-compose && chmod +x docker-compose
+      - name: Build Docker image
+        working-directory: ./boggl/for-deployment
+        run: ../../docker-compose build
+      - name: Push Docker image
+        working-directory: ./boggl/for-deployment
+        run: ../../docker-compose push
