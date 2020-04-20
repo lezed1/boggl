@@ -6,15 +6,15 @@ services:
       dockerfile: ../for-deployment/Dockerfile
     image: docker.pkg.github.com/lezed1/boggl/server:latest
     ports:
-      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:44359:3000"
     depends_on:
       - mongodb
     environment:
-      PORT: 3000
+      PORT: 44359
       ROOT_URL: ${APP_ROOT_URL:-http://localhost}
       MONGO_URL: mongodb://mongodb/meteor
       LOG_TO_STDOUT: 1
-      # VIRTUAL_PORT: 3000
+      # VIRTUAL_PORT: 44359
       # VIRTUAL_HOST: boggl.lezed1.com
 
   # nginx-proxy:
