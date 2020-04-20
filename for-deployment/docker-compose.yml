@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  web:
+    build:
+      context: ../boggl
+      dockerfile: ../for-deployment/Dockerfile
+    image: lezed1/boggl
+    ports:
+      - "127.0.0.1:44359:3000"
+    depends_on:
+      - mongodb
+    environment:
+      PORT: 44359
+      ROOT_URL: ${APP_ROOT_URL:-http://localhost}
+      MONGO_URL: mongodb://mongodb/meteor
+      LOG_TO_STDOUT: 1
+      # VIRTUAL_PORT: 44359
+      # VIRTUAL_HOST: boggl.lezed1.com
+
+  # nginx-proxy:
+  #   image: jwilder/nginx-proxy
+  #   ports:
+  #     - "8080:80"
+  #   volumes:
+  #     - /var/run/docker.sock:/tmp/docker.sock:ro
+  #   environment:
+  #     DEFUALT_HOST: boggl.lezed1.com
+
+  mongodb:
+    image: mongo:3.5

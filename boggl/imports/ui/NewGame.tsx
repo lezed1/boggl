@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { insertNewGame } from '../api/games';
 
 export const NewGame = () => {

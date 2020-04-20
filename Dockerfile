@@ -11,3 +11,4 @@ RUN meteor help
 
 WORKDIR /home/web-runner/code/boggl
 CMD [ "meteor" ]
+# CMD [ "meteor", "npm", "run", "visualize" ]
