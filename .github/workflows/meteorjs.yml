@@ -20,3 +20,5 @@ jobs:
         run: meteor npm install
       - working-directory: ./boggl
         run: meteor npm run test
+      - working-directory: ./boggl
+        run: meteor npm run prettier-check

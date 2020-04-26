@@ -31,7 +31,9 @@ export const Board = () => {
       {letterTable(game.board)}
       <div>
         Started{' '}
-        {DateTime.fromJSDate(game.createdAt).toRelative({ unit: 'seconds' })}
+        {DateTime.fromJSDate(game.createdAt).toRelative({
+          unit: 'seconds',
+        })}
       </div>
     </div>
   );
