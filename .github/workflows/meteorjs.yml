@@ -1,4 +1,4 @@
-name: Build Meteor app
+name: Build and test Meteor app
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [master]
 
 jobs:
-  build:
+  run-tests:
     runs-on: ubuntu-latest
 
     steps:
