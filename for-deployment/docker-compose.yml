@@ -5,6 +5,7 @@ services:
       context: ../boggl
       dockerfile: ../for-deployment/Dockerfile
     image: docker.pkg.github.com/lezed1/boggl/server:latest
+    restart: always
     ports:
       - "127.0.0.1:44359:3000"
     depends_on:
@@ -17,6 +18,17 @@ services:
       # VIRTUAL_PORT: 3000
       # VIRTUAL_HOST: boggl.lezed1.com
 
+  argo-tunnel:
+    image: msnelling/cloudflared:latest
+    restart: always
+    depends_on:
+      - web
+    volumes:
+      - ~/.cloudflared/cert.pem:/etc/cloudflared/cert.pem
+    environment:
+      TUNNEL_HOSTNAME: boggl.lezed1.com
+      TUNNEL_URL: http://web:3000
+
   # nginx-proxy:
   #   image: jwilder/nginx-proxy
   #   ports:
@@ -28,3 +40,4 @@ services:
 
   mongodb:
     image: mongo:3.5
+    restart: always
