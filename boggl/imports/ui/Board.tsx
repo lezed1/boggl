@@ -1,64 +1,51 @@
 import React from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
-import { DateTime, Duration } from 'luxon';
 import { GamesCollection } from '/imports/api/games';
-import { currentTime } from '/client/main';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
-
-const letterTable = (board: string[][]) => (
-  <table>
-    <tbody>
-      {board.map((row, i) => (
-        <tr key={i}>
-          {row.map((die, i) => (
-            <td key={i}>{die}</td>
-          ))}
-        </tr>
-      ))}
-    </tbody>
-  </table>
-);
 
 export const Board = () => {
-  const { game, time } = useTracker(() => {
-    const game = GamesCollection.findOne({}, { sort: { createdAt: -1 } });
-    const time = DateTime.fromJSDate(currentTime());
-    return { game, time };
+  const game = useTracker(() => {
+    return GamesCollection.findOne({}, { sort: { createdAt: -1 } });
   });
 
   if (game === undefined) {
     return <div>Loading...</div>;
   }
 
-  const gameLength = Duration.fromObject({ seconds: game.gameLengthSeconds });
-  const gameStart = DateTime.fromJSDate(game.createdAt);
-  const gameEnd = gameStart.plus(gameLength);
-
-  let isFinished = time >= gameEnd;
-
-  let status;
-  if (isFinished) {
-    status = 'Game finished!';
-  } else {
-    status = (
-      <CircularProgressbar
-        value={time.valueOf()}
-        minValue={gameStart.valueOf()}
-        maxValue={gameEnd.valueOf()}
-        strokeWidth={50}
-        styles={buildStyles({
-          strokeLinecap: 'butt',
-          pathTransitionDuration: 0,
-        })}
-      ></CircularProgressbar>
-    );
-  }
+  // return (
+  //   <div className="board">
+  //     <div className="grid-container">
+  //       <div className="grid-y grid-padding-y">
+  //         {game.board.map((row, i) => (
+  //           <div className="cell grid-x grid-padding-x" key={i}>
+  //             {row.map((die, i) => (
+  //               <div className="cell auto" key={i}>
+  //                 <div className="die">
+  //                   <div className="flex-container align-center-middle">
+  //                     <div className="die-text text-center">{die}</div>
+  //                   </div>
+  //                 </div>
+  //               </div>
+  //             ))}
+  //           </div>
+  //         ))}
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
 
   return (
     <div className="board">
-      {letterTable(game.board)}
-      <div>{status}</div>
+      {game.board.map((row) =>
+        row.map((die, i) => (
+          <div className="" key={i}>
+            <div className="die">
+              <div className="flex-container align-center-middle">
+                <h3 className="die-text text-center">{die}</h3>
+              </div>
+            </div>
+          </div>
+        ))
+      )}
     </div>
   );
 };

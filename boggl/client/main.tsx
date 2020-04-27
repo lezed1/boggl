@@ -4,6 +4,9 @@ import { Session } from 'meteor/session';
 import { render } from 'react-dom';
 import { App } from '/imports/ui/App';
 
+import 'foundation-sites/dist/js/foundation';
+import 'foundation-sites/dist/css/foundation.css';
+
 const timeSessionKey = 'currentTime';
 Session.set(timeSessionKey, new Date());
 export const currentTime = () => Session.get(timeSessionKey) as Date;

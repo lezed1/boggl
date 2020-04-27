@@ -18,14 +18,28 @@
   "eslintConfig": {
     "extends": "@meteorjs/eslint-config-meteor"
   },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {
+        "browsers": [
+          "last 2 versions",
+          "ie >= 9",
+          "and_chr >= 2.3"
+        ]
+      }
+    }
+  },
   "dependencies": {
     "@babel/runtime": "^7.8.4",
+    "foundation-sites": "^6.6.3",
+    "jquery": "^3.5.0",
     "lodash": "^4.17.15",
     "luxon": "^1.23.0",
     "meteor-node-stubs": "^1.0.0",
     "react": "^16.13.0",
     "react-circular-progressbar": "^2.0.3",
-    "react-dom": "^16.13.0"
+    "react-dom": "^16.13.0",
+    "what-input": "^5.2.7"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.150",
@@ -34,6 +48,7 @@
     "@types/mocha": "^5.2.7",
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
+    "autoprefixer": "^9.7.6",
     "prettier": "2.0.5",
     "typescript": "^3.8.2"
   },

@@ -1,14 +1,16 @@
 import React from 'react';
 import { insertNewGame } from '../api/games';
 
-export const NewGame = () => {
+export const NewGameButton = () => {
   const newGame = () => {
     insertNewGame();
   };
 
   return (
     <div>
-      <button onClick={newGame}>New Game</button>
+      <button className="button" type="button" onClick={newGame}>
+        New Game
+      </button>
     </div>
   );
 };
