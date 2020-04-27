@@ -1,9 +1,11 @@
 import { Mongo } from 'meteor/mongo';
-import * as _ from 'lodash';
+import _ from 'lodash';
+import { Duration } from 'luxon';
 
 export interface Game {
   _id?: string;
   board: string[][];
+  gameLengthSeconds: number;
   createdAt: Date;
 }
 
@@ -39,6 +41,8 @@ const dice = [
   'ETILIC',
 ];
 
+const gameLength = Duration.fromObject({ minutes: 3 });
+
 export const createNewGame: () => string[][] = () => {
   return (_.chain(dice)
     .map(_.sample)
@@ -49,5 +53,9 @@ export const createNewGame: () => string[][] = () => {
 
 export const insertNewGame = () => {
   const board = createNewGame();
-  GamesCollection.insert({ board, createdAt: new Date() });
+  GamesCollection.insert({
+    board,
+    gameLengthSeconds: gameLength.as('seconds'),
+    createdAt: new Date(),
+  });
 };

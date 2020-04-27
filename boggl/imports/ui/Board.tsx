@@ -1,7 +1,10 @@
 import React from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
-import { DateTime } from 'luxon';
-import { GamesCollection } from '../api/games';
+import { DateTime, Duration } from 'luxon';
+import { GamesCollection } from '/imports/api/games';
+import { currentTime } from '/client/main';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 const letterTable = (board: string[][]) => (
   <table>
@@ -18,23 +21,44 @@ const letterTable = (board: string[][]) => (
 );
 
 export const Board = () => {
-  const game = useTracker(() => {
-    return GamesCollection.findOne({}, { sort: { createdAt: -1 } });
+  const { game, time } = useTracker(() => {
+    const game = GamesCollection.findOne({}, { sort: { createdAt: -1 } });
+    const time = DateTime.fromJSDate(currentTime());
+    return { game, time };
   });
 
   if (game === undefined) {
     return <div>Loading...</div>;
   }
 
+  const gameLength = Duration.fromObject({ seconds: game.gameLengthSeconds });
+  const gameStart = DateTime.fromJSDate(game.createdAt);
+  const gameEnd = gameStart.plus(gameLength);
+
+  let isFinished = time >= gameEnd;
+
+  let status;
+  if (isFinished) {
+    status = 'Game finished!';
+  } else {
+    status = (
+      <CircularProgressbar
+        value={time.valueOf()}
+        minValue={gameStart.valueOf()}
+        maxValue={gameEnd.valueOf()}
+        strokeWidth={50}
+        styles={buildStyles({
+          strokeLinecap: 'butt',
+          pathTransitionDuration: 0,
+        })}
+      ></CircularProgressbar>
+    );
+  }
+
   return (
     <div className="board">
       {letterTable(game.board)}
-      <div>
-        Started{' '}
-        {DateTime.fromJSDate(game.createdAt).toRelative({
-          unit: 'seconds',
-        })}
-      </div>
+      <div>{status}</div>
     </div>
   );
 };

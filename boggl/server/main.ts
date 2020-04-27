@@ -7,3 +7,9 @@ Meteor.startup(() => {
     insertNewGame();
   }
 });
+
+Meteor.methods({
+  getCurrentTime: function () {
+    return new Date();
+  },
+});
