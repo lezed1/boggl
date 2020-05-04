@@ -17,14 +17,14 @@ export const Board = withResizeDetector(({ width, height }) => {
 
   return (
     <div
-      className="grid-container"
+      className="grid-container fluid"
       style={{ width: squareSize, height: squareSize }}
     >
-      <div className="grid-y">
+      <div className="grid-y grid-padding-y">
         {game.board.map((row, i) => (
-          <div className="cell grid-x" key={i}>
+          <div className="cell grid-x grid-padding-x" key={i}>
             {row.map((die, i) => (
-              <div className="die-container cell auto" key={i}>
+              <div className="cell auto" key={i}>
                 <svg className="die" viewBox="0 0 20 20">
                   <text
                     x="50%"
@@ -34,7 +34,7 @@ export const Board = withResizeDetector(({ width, height }) => {
                   >
                     {die}
                   </text>
-                </svg>{' '}
+                </svg>
               </div>
             ))}
           </div>
