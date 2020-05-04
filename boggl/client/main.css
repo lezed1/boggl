@@ -6,6 +6,10 @@
   grid-template-columns: repeat(5, 1fr);
 }
 
+.die-container {
+  padding: 0.35rem;
+}
+
 .die {
   width: 100%;
   height: 100%;
