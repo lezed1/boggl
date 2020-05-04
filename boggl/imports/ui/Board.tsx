@@ -38,18 +38,23 @@ export const Board = withResizeDetector(({ width, height }) => {
   const squareSize = _.min([width, height]);
 
   return (
-    <div className="board" style={{ width: squareSize, height: squareSize }}>
-      {game.board.map((row) =>
-        row.map((die, i) => (
-          <div className="" key={i}>
-            <div className="die">
-              <div className="flex-container align-center-middle">
-                <h3 className="die-text text-center">{die}</h3>
-              </div>
-            </div>
-          </div>
-        ))
-      )}
+    <div className="flex-container align-center-middle">
+      <div className="board" style={{ width: squareSize, height: squareSize }}>
+        {game.board.map((row) =>
+          row.map((die, i) => (
+            <svg className="die" key={i} viewBox="0 0 20 20">
+              <text
+                x="50%"
+                y="50%"
+                text-anchor="middle"
+                alignmentBaseline="central"
+              >
+                {die}
+              </text>
+            </svg>
+          ))
+        )}
+      </div>
     </div>
   );
 });

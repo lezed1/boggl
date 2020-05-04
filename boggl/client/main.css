@@ -1,6 +1,4 @@
 .board {
-  /* width: min(100vw, 1100);
-  height: min(100vw, 10px); */
   display: grid;
   gap: 3vmin;
   padding: 3vmin;
@@ -9,13 +7,10 @@
 }
 
 .die {
-  padding: 50% 0% 50% 0%;
+  width: 100%;
+  height: 100%;
   border: 2px solid black;
   background-color: burlywood;
-}
-
-.die-text {
-  position: absolute;
 }
 
 .game-status {
