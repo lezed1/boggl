@@ -1,8 +1,10 @@
 import React from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
+import _ from 'lodash';
 import { GamesCollection } from '/imports/api/games';
+import { withResizeDetector } from 'react-resize-detector';
 
-export const Board = () => {
+export const Board = withResizeDetector(({ width, height }) => {
   const game = useTracker(() => {
     return GamesCollection.findOne({}, { sort: { createdAt: -1 } });
   });
@@ -33,8 +35,10 @@ export const Board = () => {
   //   </div>
   // );
 
+  const squareSize = _.min([width, height]);
+
   return (
-    <div className="board">
+    <div className="board" style={{ width: squareSize, height: squareSize }}>
       {game.board.map((row) =>
         row.map((die, i) => (
           <div className="" key={i}>
@@ -48,4 +52,4 @@ export const Board = () => {
       )}
     </div>
   );
-};
+});

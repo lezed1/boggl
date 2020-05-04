@@ -39,6 +39,7 @@
     "react": "^16.13.0",
     "react-circular-progressbar": "^2.0.3",
     "react-dom": "^16.13.0",
+    "react-resize-detector": "^4.2.3",
     "what-input": "^5.2.7"
   },
   "devDependencies": {
@@ -48,6 +49,7 @@
     "@types/mocha": "^5.2.7",
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
+    "@types/react-resize-detector": "^4.2.0",
     "autoprefixer": "^9.7.6",
     "prettier": "2.0.5",
     "typescript": "^3.8.2"
