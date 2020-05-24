@@ -1,7 +1,18 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	]
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "extensions": {
+    "recommendations": [
+      "ms-azuretools.vscode-docker",
+      "dbaeumer.vscode-eslint",
+      "eg2.vscode-npm-script",
+      "christian-kohler.npm-intellisense",
+      "esbenp.prettier-vscode",
+      "redhat.vscode-yaml",
+      "visualstudioexptteam.vscodeintellicode"
+    ]
+  }
 }
