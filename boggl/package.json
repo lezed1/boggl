@@ -32,6 +32,7 @@
   "dependencies": {
     "@babel/runtime": "^7.8.4",
     "foundation-sites": "^6.6.3",
+    "immutable": "^4.0.0-rc.12",
     "jquery": "^3.5.0",
     "lodash": "^4.17.15",
     "luxon": "^1.23.0",
@@ -40,9 +41,11 @@
     "react-circular-progressbar": "^2.0.3",
     "react-dom": "^16.13.0",
     "react-resize-detector": "^4.2.3",
+    "trie-prefix-tree": "^1.5.1",
     "what-input": "^5.2.7"
   },
   "devDependencies": {
+    "@types/immutable": "^3.8.7",
     "@types/lodash": "^4.14.150",
     "@types/luxon": "^1.22.0",
     "@types/meteor": "^1.4.40",
@@ -50,6 +53,7 @@
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
     "@types/react-resize-detector": "^4.2.0",
+    "@types/trie-prefix-tree": "^1.5.0",
     "autoprefixer": "^9.7.6",
     "prettier": "2.0.5",
     "typescript": "^3.8.2"

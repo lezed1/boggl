@@ -29,7 +29,7 @@ export const Board = withResizeDetector(({ width, height }) => {
                   <text
                     x="50%"
                     y="50%"
-                    text-anchor="middle"
+                    textAnchor="middle"
                     alignmentBaseline="central"
                   >
                     {die}

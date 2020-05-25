@@ -8,8 +8,16 @@ Meteor.startup(() => {
   }
 });
 
+declare var Assets: { getText(assetPath: string): string };
+const dictionary = Assets.getText('collins_scrabble_dictionary_2019.txt')
+  .split('\n')
+  .filter((line) => line[0] != '#');
+
 Meteor.methods({
   getCurrentTime: function () {
     return new Date();
+  },
+  getAllWords: function () {
+    return dictionary;
   },
 });
