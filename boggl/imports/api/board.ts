@@ -131,7 +131,7 @@ export const allValidWords = (board: Board, dictionary: trieType) => {
     numRows: board.length,
     numCols: board[0].length,
     words: new Set(),
-    minimumWordLength: 4, // Don't hardcode it
+    minimumWordLength: 5, // Don't hardcode it
     dictionary,
   };
 
