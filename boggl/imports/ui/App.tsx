@@ -7,7 +7,7 @@ import { WordList } from './WordList';
 export const App = () => (
   <div>
     <div className="grid-frame grid-y">
-      <div className="call auto top-bar">
+      <div className="cell auto top-bar">
         <div className="top-bar-left">
           <ul className="menu">
             <li className="menu-text">Boggl</li>
