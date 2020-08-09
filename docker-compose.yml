@@ -2,7 +2,27 @@ version: "3.7"
 services:
   web:
     build: .
+    image: docker.pkg.github.com/lezed1/boggl/server:latest
+    restart: always
     ports:
-      - "3000:3000"
+      - "127.0.0.1:44359:3000"
+    depends_on:
+      - mongodb
+    environment:
+      PORT: 3000
+      ROOT_URL: https://boggl.lezed1.com
+
+  mongodb:
+    image: mongo:3.5
+    restart: always
+
+  argo-tunnel:
+    image: msnelling/cloudflared:latest
+    restart: always
+    depends_on:
+      - web
     volumes:
-      - .:/home/web-runner/code
+      - ~/.cloudflared:/etc/cloudflared
+    environment:
+      TUNNEL_HOSTNAME: boggl.lezed1.com
+      TUNNEL_URL: http://web:3000

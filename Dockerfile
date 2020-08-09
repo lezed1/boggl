@@ -1,14 +1,35 @@
-FROM ubuntu:18.04
+# The tag here should match the Meteor version of your app, per .meteor/release
+FROM geoffreybooth/meteor-base:1.10.1
 
-RUN apt-get -y update && apt-get -y upgrade
-RUN apt-get install -y curl less
-RUN curl https://install.meteor.com/?release=1.10.1 | sh
+# Copy app package.json and package-lock.json into container
+COPY ./boggl/package*.json $APP_SOURCE_FOLDER/
 
-RUN useradd -ms /bin/bash web-runner
-USER web-runner
+RUN bash $SCRIPTS_FOLDER/build-app-npm-dependencies.sh
 
-RUN meteor help
+# Copy app source into container
+COPY ./boggl $APP_SOURCE_FOLDER/
 
-WORKDIR /home/web-runner/code/boggl
-CMD [ "meteor" ]
-# CMD [ "meteor", "npm", "run", "visualize" ]
+RUN bash $SCRIPTS_FOLDER/build-meteor-bundle.sh
+
+
+# Use the specific version of Node expected by your Meteor release, per https://docs.meteor.com/changelog.html; this is expected for Meteor 1.10.1
+FROM node:12.16.1-alpine
+
+ENV APP_BUNDLE_FOLDER /opt/bundle
+ENV SCRIPTS_FOLDER /docker
+
+# Runtime dependencies; if your dependencies need compilation (native modules such as bcrypt) or you are using Meteor <1.8.1, use app-with-native-dependencies.dockerfile instead
+RUN apk --no-cache add \
+    bash \
+    ca-certificates
+
+# Copy in entrypoint
+COPY --from=0 $SCRIPTS_FOLDER $SCRIPTS_FOLDER/
+
+# Copy in app bundle
+COPY --from=0 $APP_BUNDLE_FOLDER/bundle $APP_BUNDLE_FOLDER/bundle/
+
+RUN bash $SCRIPTS_FOLDER/build-meteor-npm-dependencies.sh
+
+WORKDIR ${APP_BUNDLE_FOLDER}/bundle
+CMD ["node", "main.js"]
