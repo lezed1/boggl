@@ -34,7 +34,7 @@
     "foundation-sites": "^6.6.3",
     "immutable": "^4.0.0-rc.12",
     "jquery": "^3.5.1",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "luxon": "^1.24.1",
     "meteor-node-stubs": "^1.0.1",
     "react": "^16.13.0",
